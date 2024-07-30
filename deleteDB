@@ -1,0 +1,71 @@
+#!/bin/bash
+
+echo "Enter the Name of the DataBase you want to delete :("
+read db_name
+
+if [ -e "db/$db_name" ]; then
+    clear
+    echo -e "\e[31mAre you sure you want to delete $db_name?\e[0m"
+    select answer in "Yes" "No" "Exit"; do
+        case $answer in
+            "Yes")
+                clear
+                rm -r "db/$db_name"
+                clear
+                echo -e "\e[32m$db_name is removed successfully\e[0m"
+                
+                select reply in "Go back to database menu" "Exit"; do
+                    case $reply in
+                        "Go back to database menu")
+                            clear
+                            source ./main_menu.sh
+                            break
+                            ;;
+                        "Exit")
+                        clear
+                            echo "Good Bye"
+                            break 20
+                            ;;
+                        *)
+                            echo -e "\e[31mPlease enter a valid input\e[0m"
+                            ;;
+                    esac
+                done
+                ;;
+
+            "No")
+                clear
+                source ./main_menu.sh
+                break
+                ;;
+
+            "Exit")
+                echo "Good Bye ^_^"
+                break 20
+                ;;
+
+            *)
+                echo -e "\e[31mPlease enter a valid input\e[0m"
+                ;;
+        esac
+    done
+else
+    echo -e "\e[31mNo DataBase named $db_name\e[0m"
+    select vr in "Return Back To database menu" "Exit"; do
+        case $REPLY in
+            1)
+                clear
+                source ./main_menu.sh
+                ;;
+            2)
+                clear
+                echo "Good Bye ^_^"
+                break 20
+                ;;
+            *)
+                echo -e "\e[31mPlease enter a valid input"
+                ;;
+        esac
+    done
+fi
+

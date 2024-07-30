@@ -1,0 +1,2 @@
+ID:name:gender
+auto:string (Not NULL):string (Not NULL)
